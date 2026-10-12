@@ -84,7 +84,8 @@ raw_mode = False
 if need_asv:
     st.subheader("Fecal ASV features (n = 5)")
     with st.expander("📋 Taxonomic annotation of the 5 ASVs", expanded=False):
-        st.dataframe(load_taxonomy(), use_container_width=True, hide_index=True)
+        # st.dataframe(load_taxonomy(), use_container_width=True, hide_index=True)
+        st.dataframe(load_taxonomy(), width='stretch', hide_index=True)
     raw_mode = st.checkbox(
         "My inputs are raw read counts (apply CLR transformation + standardization automatically)",
         value=False,
@@ -133,7 +134,7 @@ if st.button("Predict", type="primary"):
         import shap
         from streamlit_shap import st_shap
 
-        shap.initjs()
+        # shap.initjs()
         bg = pd.read_csv(f'models/bg_{key}.csv')          # 真正的背景：测试集中位数
         wrapper = AutogluonWrapper(pred_obj, list(X.columns), model_name)
         explainer = shap.KernelExplainer(wrapper.predict_binary_prob, bg)
